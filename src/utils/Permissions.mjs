@@ -1,4 +1,5 @@
 import { PermissionFlagsBits, PermissionsBitField } from "discord.js";
+//<----------------------------------||Importing Modules||---------------------------------->
 
 /**
  * 
@@ -7,6 +8,8 @@ import { PermissionFlagsBits, PermissionsBitField } from "discord.js";
  * @param {import("discord.js").Collection<string, import("discord.js").Role>} [providedRoles] 
  * @returns {{everyone: import("discord.js").OverwriteData, roles: import("discord.js").OverwriteData[], member: import("discord.js").OverwriteData}}
  */
+//<----------------------------------|Geting Channels abd Overwriteing|---------------------------------->
+
 export function getChannelOverwrites(me, channel, providedRoles) {
     if (!me) return [];
     const roles = providedRoles ?? me.roles.cache;
@@ -39,6 +42,8 @@ export function getChannelOverwrites(me, channel, providedRoles) {
  * @param  {...any} perms 
  * @returns 
  */
+//<----------------------------------|Writing Channels|---------------------------------->
+
 export function checkPermOverwrites(client, channel, ...perms) {
     const permissions = returnOverwrites(client, channel);
     if(typeof permissions === "boolean") return permissions;
@@ -52,6 +57,8 @@ export function checkPermOverwrites(client, channel, ...perms) {
  * @param {import("discord.js").Channel} channel 
  * @returns {import("discord.js").PermissionsBitField} permissions
  */
+//<----------------------------------|Giving Output back|---------------------------------->
+
 export function returnOverwrites(client, channel) {
     const { me } = channel.guild?.members || {};
     if(me.permissions?.has(PermissionFlagsBits.Administrator)) return true;
@@ -77,6 +84,8 @@ export function returnOverwrites(client, channel) {
  * @param {bigint[]} PermissionFlagsBits 
  * @returns {import("discord.js").PermissionsBitField} permissions
  */
+//<----------------------------------|Chrck Permission|---------------------------------->
+
 export function checkPerms(client, channel, ...PermissionFlagsBits) {
     if(channel?.guild?.members?.me?.permissions?.has(PermissionFlagsBits.Administrator)) return true;
     if(channel?.guild?.members?.me) return checkPermOverwrites(client, channel, ...PermissionFlagsBits);
